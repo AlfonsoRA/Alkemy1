@@ -1,0 +1,47 @@
+<br>
+<div class="container marginTop">
+    <h2>List of subjects</h2><br>
+    <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-success" type="button" [routerLink]="['/materia/form']">
+      Crear materia
+    </button>
+    </div><br>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Max_Alum</th>
+                <th scope="col">Fecha de Creacion</th>
+                <th scope="col">Detalle</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let materia of listaMaterias">
+                <th scope="row">{{materia.id}}</th>
+                <td>{{materia.nombre}}</td>
+                <td>{{materia.horario}}</td>
+                <td>{{materia.max_alum}}</td>
+                <td>{{materia.create_at | date}}</td>
+                <td>
+                    <button name="Descripcion" class="btn btn-sm btn-success" type="button" [routerLink]="['/materia/detalle']">
+                    Ver
+                  </button>
+                </td>
+                <td>
+                    <button name="modificar" class="btn btn-sm btn-success" type="button" [routerLink]="['/materia/form', materia.id]">
+                    Modificar
+                  </button>
+                </td>
+                <td>
+                    <button name="eliminar" class="btn btn-sm btn-danger" type="button" (click)="delete(materia)">
+                    Eliminar
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

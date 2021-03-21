@@ -1,0 +1,42 @@
+<br>
+<div class="container marginTop">
+    <h2>List of teachers</h2><br>
+    <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-success" type="button" [routerLink]="['/profesor/form']">
+        Crear cliente
+      </button>
+    </div><br>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">DNI</th>
+                <th scope="col">rol</th>
+                <th scope="col">Fecha de Creacion</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let profesor of listaProfesores">
+                <th scope="row">{{profesor.id}}</th>
+                <td>{{profesor.nombre}}</td>
+                <td>{{profesor.apellido}}</td>
+                <td>{{profesor.dni}}</td>
+                <td>{{profesor.rol}}</td>
+                <td>{{profesor.create_at |date}}</td>
+                <td>
+                    <button name="modificar" class="btn btn-sm btn-success" type="button" [routerLink]="['/profesor/form', profesor.id]">
+                      Modificar
+                    </button></td>
+                <td>
+                    <button name="eliminar" class="btn btn-sm btn-danger" type="button" (click)="delete(profesor)">
+                      Eliminar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

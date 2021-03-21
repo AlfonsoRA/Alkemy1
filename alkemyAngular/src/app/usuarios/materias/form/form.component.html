@@ -1,0 +1,43 @@
+<div class="card bg-dark text-white mt-5">
+    <div class="card-header bg-blue">
+        {{titulo}}
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="create()">
+            <div class="row">
+                <label for="nombre" class="col-form-label col-sm-2">
+                    Nombre:
+                </label>
+                <div class="col-sm-6" [formGroup]="myForm">
+                    <input type="text" class="form-control" formControlName="nombre">
+                    <span class="form-text text-danger" *ngIf="validacion('nombre')">Debe contener minimo 4 caracteres!!</span>
+                </div>
+            </div><br>
+            <div class="row">
+                <label for="horario" class="col-form-label col-sm-2">
+                    Horario:
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control">
+                </div>
+            </div><br>
+            <div class="row">
+                <label for="max_alum" class="col-form-label col-sm-2">
+                Maximo de Alumnos:
+            </label>
+                <div class="col-sm-6" [formGroup]="myForm">
+                    <input type="number" class="form-control" formControlName="max_alum">
+                    <span class="form-text text-danger" *ngIf="validacion('max_alum')">Materia contiene una cantidad de 0 a 30 alumnos</span>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" type="button" name="button" (click)="create()" *ngIf="!materia.id else elseBlock" [disabled]="!myForm.valid">Crear</button>
+                </div>
+                <ng-template #elseBlock>
+                    <button class="btn btn-primary" type="button" name="button" (click)="updateMateria(materia)" [disabled]="!myForm.valid">Modificar</button>
+                </ng-template>
+            </div>
+        </form>
+    </div>
+</div>

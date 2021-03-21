@@ -27,7 +27,7 @@
                 <td>{{materia.max_alum}}</td>
                 <td>{{materia.create_at | date}}</td>
                 <td>
-                    <button name="Descripcion" class="btn btn-sm btn-success" type="button" [routerLink]="['/materia/detalle']">
+                    <button name="Descripcion" class="btn btn-sm btn-success" type="button" [routerLink]="['/materia/detalle', materia.id]">
                     Ver
                   </button>
                 </td>

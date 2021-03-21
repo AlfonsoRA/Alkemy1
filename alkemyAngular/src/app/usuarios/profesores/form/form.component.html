@@ -8,27 +8,28 @@
                 <label for="nombre" class="col-form-label col-sm-2">
                   Nombre:
               </label>
-                <div class="col-sm-6" [formGroup]="myForm">
-                    <input type="text" class="form-control" formControlName="nombre">
-                    <span class="form-text text-danger" *ngIf="validacion('nombre')">Debe contener minimo 4 caracteres!!</span>
+
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="nombre" [(ngModel)]="profesor.nombre" required minlength="4" #nombre="ngModel">
+                    <div class="form-text text-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">El nombre es requerido y debe contener mas de 4 caracteres!!</div>
                 </div>
             </div><br>
             <div class="form-group row">
                 <label for="apellido" class="col-form-label col-sm-2">
                   Apellido:
               </label>
-                <div class="col-sm-6" [formGroup]="myForm">
-                    <input type="text" class="form-control" formControlName="apellido">
-                    <span class="form-text text-danger" *ngIf="validacion('apellido')">No puede estar vacio!!</span>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="apellido" [(ngModel)]="profesor.apellido" required #apellido="ngModel">
+                    <span class="form-text text-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">No puede estar vacio!!</span>
                 </div>
             </div><br>
             <div class="form-group row">
                 <label for="dni" class="col-form-label col-sm-2">
                   DNI:
               </label>
-                <div class="col-sm-6" [formGroup]="myForm">
-                    <input type="number" class="form-control" formControlName="dni">
-                    <span class="form-text text-danger" *ngIf="validacion('dni')">No puede estar vacio!!</span>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" name="dni" [(ngModel)]="profesor.dni" required min="1" #dni="ngModel">
+                    <span class="form-text text-danger" *ngIf="dni.invalid && (dni.dirty || dni.touched)">El dni es requerido y debe ser mayor a 0!!</span>
                 </div>
             </div><br>
             <div class="form-group row">

@@ -16,22 +16,18 @@ export class DetalleMateriaComponent implements OnInit {
   constructor(private materiasService: MateriasService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-      this.cargarDescripcion();
-  };
-
-  public cargarDescripcion(): void{
     this.activatedRoute.params.subscribe(
-        param => {
-          let id = param['id']
-          if(id){
-            this.materiasService.getMateria(id).subscribe(
-              respuesta => {
-                this.descripcion = respuesta
-              }
-            )
-          }
+      param => {
+        let id = param['id']
+        if(id){
+          this.materiasService.getMateria(id).subscribe(
+            respuesta => {
+              this.descripcion = respuesta
+            }
+          )
         }
-    )
+      }
+  )
   };
 
 }

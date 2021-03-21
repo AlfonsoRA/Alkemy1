@@ -16,7 +16,8 @@ const ROUTES: Routes =[
   {path: 'materia', component: MateriasComponent},
   {path: 'materia/form', component:FormMateriaComponent},
   {path: 'materia/form/:id', component:FormMateriaComponent},
-  {path: 'materia/detalle', component:DetalleMateriaComponent}
+  {path: 'materia/detalle', component:DetalleMateriaComponent},
+  {path: 'materia/detalle/:id', component:DetalleMateriaComponent}
 
 ]
 

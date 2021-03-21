@@ -15,15 +15,27 @@ export class FormMateriaComponent implements OnInit {
   public materia: Materia = new Materia();
   public titulo: string = "Crear Materia";
   public errores!: String[];
-  myForm: FormGroup = this.formBuilder.group({
+  /*myForm: FormGroup = this.formBuilder.group({
     nombre: [this.materia.nombre,[Validators.required, Validators.minLength(4)]],
     max_alum: [0, [Validators.required, Validators.min(0), Validators.max(30)]]
-  });
+  });*/
 
-  constructor(private materiasService: MateriasService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private materiasService: MateriasService, private router: Router, private activatedRoute: ActivatedRoute, /* private formBuilder: FormBuilder */) { }
 
   ngOnInit(): void {
-    this.cargarMateria();
+    this.activatedRoute.params.subscribe(
+      param => {
+        let id = param['id'];
+        if(id){
+          this.materiasService.getMateria(id).subscribe(
+            respuesta => {
+              this.materia = respuesta;
+              console.log(this.materia)
+            }
+          )
+        }
+      }
+    );
   }
 
   public create(): void {
@@ -43,10 +55,10 @@ export class FormMateriaComponent implements OnInit {
   };
 
   public updateMateria(materia: Materia): void{
-    this.materiasService.updateMaestro(this.materia).subscribe(
+    this.materiasService.updateMateria(this.materia).subscribe(
       json => {
         this.router.navigate(['/materia'])
-        swal.fire('Materia Actualizada', `${json.mensaje}: ${json.materia.nombre} actualizado con exito !`, 'success' )
+        swal.fire('Materia Actualizada', `${json.mensaje}: ${json.materia.nombre} actualizado con exito!`, 'success' )
       },
       err => {
         this.errores = err.error.errors as String[];
@@ -56,23 +68,10 @@ export class FormMateriaComponent implements OnInit {
     )
   }
 
-  public cargarMateria(): void{
-    this.activatedRoute.params.subscribe(
-        param => {
-          let id = param['id']
-          if(id){
-            this.materiasService.getMateria(id).subscribe(
-              respuesta => {
-                this.materia = respuesta
-              }
-            )
-          }
-        }
-    )
-  };
 
-  validacion(campo:string){
+
+  /* validacion(campo:string){
     return this.myForm.controls[campo].errors && this.myForm.controls[campo].touched;
-  }
+  } */
 
 }

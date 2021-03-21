@@ -30,7 +30,6 @@ public class Materia {
 	@Transient
 	private List<String> horario;
 
-	@NotEmpty(message = "no puede estar vacio!!")
 	@Column(name = "max_student")
 	private Integer max_alum;
 	

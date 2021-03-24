@@ -7,6 +7,7 @@ import { ProfesoresComponent } from './usuarios/profesores/profesores.component'
 import { FormMateriaComponent } from './usuarios/materias/form/form.component';
 import { MateriasComponent } from './usuarios/materias/materias.component';
 import { DetalleMateriaComponent } from './usuarios/materias/detalle-materia/detalle-materia.component';
+import { InscripcionMateriaComponent } from './usuarios/materias/inscripcion-materia/inscripcion-materia.component';
 
 const ROUTES: Routes =[
   {path: ' ', redirectTo: 'profesores', pathMatch: 'full'},
@@ -17,8 +18,8 @@ const ROUTES: Routes =[
   {path: 'materia/form', component:FormMateriaComponent},
   {path: 'materia/form/:id', component:FormMateriaComponent},
   {path: 'materia/detalle', component:DetalleMateriaComponent},
-  {path: 'materia/detalle/:id', component:DetalleMateriaComponent}
-
+  {path: 'materia/detalle/:id', component:DetalleMateriaComponent},
+  {path: 'materia/inscripcion/:id', component:InscripcionMateriaComponent}
 ]
 
 @NgModule({

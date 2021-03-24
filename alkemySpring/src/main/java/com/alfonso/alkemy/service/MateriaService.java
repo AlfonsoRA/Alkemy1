@@ -21,7 +21,7 @@ public class MateriaService implements IMateriaService {
 	}
 
 	@Override
-	public Materia getMateria(Long id) {
+	public Materia getMateria(Integer id) {
 		return repositoryMateria.findById(id).orElse(null);
 	}
 
@@ -36,7 +36,7 @@ public class MateriaService implements IMateriaService {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		repositoryMateria.deleteById(id);
 	}
 

@@ -1,0 +1,62 @@
+<div class="card bg-dark text-white mt-5">
+    <div class="card-header bg-blue">
+        {{titulo}}
+    </div>
+    <div class="card-body">
+        <form #inscripcionForm="ngForm">
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-2">
+                   Nombre:
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="nombre" required minlength="4">
+                </div>
+            </div><br>
+            <div class="form-group row">
+                <label for="apellido" class="col-form-label col-sm-2">
+                Apellido:
+            </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="apellido" required>
+                </div>
+            </div><br>
+            <div class="form-group row">
+                <label for="dni" class="col-form-label col-sm-2">
+                DNI:
+            </label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" name="dni" required min="1">
+                </div>
+            </div><br>
+            <div class="form-group row">
+                <label for="dni" class="col-form-label col-sm-2">
+              Materia:
+          </label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="NombreMateria" [(ngModel)]="materia.nombre" #nombreMateria="ngModel">
+                </div>
+            </div><br>
+            <div class="form-group row">
+                <label for="rol" class="col-form-label col-sm-2">
+                  Horarios:
+              </label>
+                <div class="col-sm-6">
+                    <select class="form-select" aria-label="Default select example">
+                  <option selected>Horarios</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                </div>
+            </div><br>
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" type="button" name="button" [disabled]="!inscripcionForm.form.valid">Crear</button>
+                </div>
+                <ng-template #elseBlock>
+                    <button class="btn btn-primary" type="button" name="button" [disabled]="!inscripcionForm.form.valid">Modificar</button>
+                </ng-template>
+            </div>
+        </form>
+    </div>
+</div>

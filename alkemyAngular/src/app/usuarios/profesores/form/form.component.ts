@@ -15,11 +15,11 @@ export class FormComponent implements OnInit {
   public profesor: Profesor = new Profesor();
   public titulo: string = "Crear Profesor";
   public errores!: String[];
-  myForm: FormGroup = this.formBuilder.group({
+  /* myForm: FormGroup = this.formBuilder.group({
     nombre: [this.profesor.nombre,[Validators.required, Validators.minLength(4)]],
     apellido: [this.profesor.apellido,[Validators.required]],
     dni: [this.profesor.dni, [Validators.required, Validators.min(0)]]
-  });
+  }); */
 
   constructor(private profesoresService: ProfesoresService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) { }
 
@@ -72,9 +72,9 @@ export class FormComponent implements OnInit {
     )
   };
 
-  validacion(campo:string){
+  /* validacion(campo:string){
     return this.myForm.controls[campo].errors && this.myForm.controls[campo].touched;
-  }
+  } */
 
 
 }

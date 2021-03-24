@@ -42,7 +42,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("usuario/{id}")
-	public ResponseEntity<?> getUsuario(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getUsuario(@PathVariable("id") Integer id) {
 		
 		Usuario usuario = null;
 		Map<String, Object> response = new HashMap<>();
@@ -89,7 +89,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("usuario/{id}")
-	public ResponseEntity<?> updateUsuario(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id) {
+	public ResponseEntity<?> updateUsuario(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Integer id) {
 		
 		Usuario usuarioActual = usuarioService.getUsuario(id);
 		
@@ -127,7 +127,7 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("usuario/{id}")
-	public ResponseEntity<?> deleteUsuario(@PathVariable Long id) {
+	public ResponseEntity<?> deleteUsuario(@PathVariable Integer id) {
 		Map<String, Object> response = new HashMap<>();
 		
 		try {

@@ -8,8 +8,8 @@ import com.alfonso.alkemy.entity.Materia;
 public interface IMateriaService {
 
 	public List<Materia> listMaterias();
-	public Materia getMateria(Long id);
+	public Materia getMateria(Integer id);
 	public Materia guardarMateria(Materia materia);
 	public Materia updateMateria(Materia materia);
-	public void delete(Long id);
+	public void delete(Integer id);
 }

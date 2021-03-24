@@ -3,8 +3,11 @@
         {{titulo}}
     </div>
     <div class="card-body">
-        <h5 class="card-title"> </h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Editar</a>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Nombre:</strong> {{materia.nombre}}</li>
+            <li class="list-group-item"><strong>Horario:</strong>{{materia.horario | json}}</li>
+            <li class="list-group-item"><strong>Cantidad de alumnos:</strong> {{materia.max_alum}}</li>
+            <li class="list-group-item"><strong>Fecha de creacion:</strong> {{materia.create_at | date}}</li>
+        </ul>
     </div>
 </div>

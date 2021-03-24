@@ -18,7 +18,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@NotEmpty(message = "no puede estar vacio!!")
 	@Size(min = 4, max = 12, message = "El nombre tiene que tener entre 4 y 12 caracteres")
@@ -45,11 +45,11 @@ public class Usuario {
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

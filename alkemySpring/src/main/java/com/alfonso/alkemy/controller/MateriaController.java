@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alfonso.alkemy.entity.Horario;
 import com.alfonso.alkemy.entity.Materia;
+import com.alfonso.alkemy.interfaces.IHorarioService;
 import com.alfonso.alkemy.interfaces.IMateriaService;
 
 @RestController
@@ -34,6 +36,9 @@ public class MateriaController {
 	@Autowired
 	private IMateriaService materiaService;
 	
+	@Autowired
+	private IHorarioService serviceHorarios;
+	
 	@GetMapping("materia")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Materia> listMateria(){
@@ -42,14 +47,15 @@ public class MateriaController {
 	}
 	
 	@GetMapping("materia/{id}")
-	public ResponseEntity<?> getMateria(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getMateria(@PathVariable("id") Integer id) {
 		
 		Materia materia = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
 			materia = materiaService.getMateria(id);
+			List<Horario> horarios = serviceHorarios.buscarPorIdMateria(materia.getId());
 		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("mensaje", "Error al realizar  la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		  }
@@ -89,7 +95,7 @@ public class MateriaController {
 	}
 	
 	@PutMapping("materia/{id}")
-	public ResponseEntity<?> updateMateria(@Valid @RequestBody Materia materia, BindingResult result, @PathVariable Long id) {
+	public ResponseEntity<?> updateMateria(@Valid @RequestBody Materia materia, BindingResult result, @PathVariable Integer id) {
 		
 		Materia materiaActual = materiaService.getMateria(id);
 		
@@ -127,7 +133,7 @@ public class MateriaController {
 	}
 	
 	@DeleteMapping("materia/{id}")
-	public ResponseEntity<?> deleteMateria(@PathVariable Long id) {
+	public ResponseEntity<?> deleteMateria(@PathVariable Integer id) {
 		Map<String, Object> response = new HashMap<>();
 		
 		try {

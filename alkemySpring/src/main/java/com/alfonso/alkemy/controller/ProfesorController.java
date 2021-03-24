@@ -45,7 +45,7 @@ public class ProfesorController {
 	}
 	
 	@GetMapping("profesor/{id}")
-	public ResponseEntity<?> getCliente(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getCliente(@PathVariable("id") Integer id) {
 		
 		Usuario usuario = null;
 		Map<String, Object> response = new HashMap<>();
@@ -92,7 +92,7 @@ public class ProfesorController {
 	}
 	
 	@PutMapping("profesor/{id}")
-	public ResponseEntity<?> updateProfesor(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id) {
+	public ResponseEntity<?> updateProfesor(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Integer id) {
 		
 		Usuario usuarioActual = usuarioService.getUsuario(id);
 		
@@ -130,7 +130,7 @@ public class ProfesorController {
 	}
 	
 	@DeleteMapping("profesor/{id}")
-	public ResponseEntity<?> deleteProfesor(@PathVariable Long id) {
+	public ResponseEntity<?> deleteProfesor(@PathVariable Integer id) {
 		Map<String, Object> response = new HashMap<>();
 		
 		try {

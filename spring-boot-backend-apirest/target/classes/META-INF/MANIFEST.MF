@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: eareizac
+Build-Jdk: 15.0.1
+Implementation-Title: spring-boot-backend-apirest
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.alfonso
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/alkemy
+Created-By: Maven Integration for Eclipse
+

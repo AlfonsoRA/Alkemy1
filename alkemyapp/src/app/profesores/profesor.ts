@@ -5,4 +5,9 @@ export class Profesor {
   public dni!: number;
   public rol!: string;
   public create_at!: string;
+  public username!: string;
+  public password!: string;
+  public enabled!: boolean;
+  public eamil!: string;
+  roles:string[] = [];
 }

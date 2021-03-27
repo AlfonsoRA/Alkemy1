@@ -15,15 +15,11 @@ export class FormComponent implements OnInit {
   public profesor: Profesor = new Profesor();
   public titulo: string = "Crear Profesor";
   public errores!: String[];
-  /* myForm: FormGroup = this.formBuilder.group({
-    nombre: [this.profesor.nombre,[Validators.required, Validators.minLength(4)]],
-    apellido: [this.profesor.apellido,[Validators.required]],
-    dni: [this.profesor.dni, [Validators.required, Validators.min(0)]]
-  }); */
 
-  constructor(private profesoresService: ProfesoresService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private profesoresService: ProfesoresService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log('llegue')
     this.cargarProfesor();
   }
 

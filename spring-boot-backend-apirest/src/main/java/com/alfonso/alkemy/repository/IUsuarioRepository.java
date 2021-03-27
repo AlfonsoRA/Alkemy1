@@ -14,6 +14,6 @@ public interface IUsuarioRepository extends CrudRepository<Usuario, Long>{
 	@Query("select u from Usuario u where u.username=?1")
 	public Usuario findByUsername2(String username);
 	
-	public List<Usuario> findByRol(String rol);
+	public List<Usuario> findByRolOrderByNombreAsc(String rol);
 
 }

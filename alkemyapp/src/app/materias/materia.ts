@@ -7,4 +7,5 @@ export class Materia {
   public horario: Array<Horario> = [];
   public max_alum!: number;
   public create_at!: string;
+  public descripcion!: string;
 }

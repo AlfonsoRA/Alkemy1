@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +36,7 @@ public class ProfesorController {
 	@Autowired
 	private IUsuarioService usuarioService;
 	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("profesores/{rol}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Usuario> listProfesores(@PathVariable String rol){
@@ -44,6 +47,7 @@ public class ProfesorController {
 		return lista;	
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("profesor/{id}")
 	public ResponseEntity<?> getCliente(@PathVariable("id") Long id) {
 		
@@ -63,6 +67,7 @@ public class ProfesorController {
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("profesor")
 	public ResponseEntity<?> save(@Valid @RequestBody Usuario usuario, BindingResult result) {
 		Usuario usuarioNew = null;
@@ -91,6 +96,7 @@ public class ProfesorController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("profesor/{id}")
 	public ResponseEntity<?> updateProfesor(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id) {
 		
@@ -129,6 +135,7 @@ public class ProfesorController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("profesor/{id}")
 	public ResponseEntity<?> deleteProfesor(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();

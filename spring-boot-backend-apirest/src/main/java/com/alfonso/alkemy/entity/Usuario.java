@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
 	@Column(unique = true)
 	private String email;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="usuario_id"),
 	inverseJoinColumns=@JoinColumn(name="role_id"),
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "role_id"})})
@@ -60,7 +60,7 @@ public class Usuario implements Serializable {
 	private String rol;
 	
 	private Date create_at;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -150,11 +150,17 @@ public class Usuario implements Serializable {
 	public void setCreate_at(Date create_at) {
 		this.create_at = create_at;
 	}
-
-
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+				+ ", email=" + email + ", roles=" + roles + ", nombre=" + nombre + ", apellido=" + apellido + ", dni="
+				+ dni + ", rol=" + rol + ", create_at=" + create_at + "]";
+	}
+	}
+
+ 

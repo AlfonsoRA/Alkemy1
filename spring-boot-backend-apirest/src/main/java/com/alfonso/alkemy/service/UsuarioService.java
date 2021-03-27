@@ -54,27 +54,32 @@ public class UsuarioService implements IUsuarioService, UserDetailsService{
 	}
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<Usuario> listUsuarios(String rol) {
-		return usuarioDao.findByRol(rol);
+		return usuarioDao.findByRolOrderByNombreAsc(rol);
 		
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Usuario getUsuario(Long id) {
 		return usuarioDao.findById(id).orElse(null);
 	}
 
 	@Override
+	@Transactional
 	public Usuario guardarUsuario(Usuario usuario) {
 		return usuarioDao.save(usuario);
 	}
 
 	@Override
+	@Transactional
 	public Usuario updateUsuario(Usuario usuario) {
 		return usuarioDao.save(usuario);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		usuarioDao.deleteById(id);;
 		

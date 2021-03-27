@@ -40,7 +40,7 @@ public class MateriaController {
 	@Autowired
 	private IHorarioService serviceHorarios;
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("materia")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Materia> listMateria(){
@@ -48,6 +48,7 @@ public class MateriaController {
 		return materiaService.listMaterias();	
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("materia/{id}")
 	public ResponseEntity<?> getMateria(@PathVariable("id") Long id) {
 		
@@ -60,14 +61,15 @@ public class MateriaController {
 			response.put("mensaje", "Error al realizar  la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		  }
-		if(materia == null) {
+		};
+		if(materia == null){
 			response.put("mensaje", "El id de la materia: ".concat(id.toString().concat(" no existe en la base de datos!!")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
+		};
 		return new ResponseEntity<Materia>(materia, HttpStatus.OK);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("materia")
 	public ResponseEntity<?> save(@Valid @RequestBody Materia materia, BindingResult result) {
 		Materia materiaNew = null;
@@ -96,6 +98,7 @@ public class MateriaController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("materia/{id}")
 	public ResponseEntity<?> updateMateria(@Valid @RequestBody Materia materia, BindingResult result, @PathVariable Long id) {
 		
@@ -134,6 +137,7 @@ public class MateriaController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("materia/{id}")
 	public ResponseEntity<?> deleteMateria(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();

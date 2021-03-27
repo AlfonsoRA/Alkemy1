@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Materia } from '../materia';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MateriasService } from '../materias.service';
+import { Usuario } from 'src/app/usuarios/usuario';
 
 @Component({
   selector: 'app-inscripcion-materia',

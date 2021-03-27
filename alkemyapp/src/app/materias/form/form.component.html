@@ -31,6 +31,14 @@
                 </div>
             </div><br>
             <div class="row">
+                <label for="descripcion" class="col-form-label col-sm-2">
+                  Descripcion:
+              </label>
+                <div class="form-floating col-sm-6">
+                    <textarea class="form-control" placeholder="Escriba la descripción de la materia" name="descripcion" [(ngModel)]="materia.descripcion" #descripciion="ngModel" id="floatingTextarea2" style="height: 100px"></textarea>
+                </div>
+            </div><br>
+            <div class="row">
                 <div class="col-sm-1">
                     <button class="btn btn-primary" type="button" name="button" (click)="create()" *ngIf="!materia.id else elseBlock" [disabled]="!materiaForm.valid">Crear</button>
                 </div>

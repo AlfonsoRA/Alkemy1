@@ -37,6 +37,9 @@ public class Materia {
 	
 	private Date create_at;
 	
+	@Column(name = "description")
+	private String descripcion;
+	
 	@PrePersist
 	private void prePersist() {
 		this.create_at = new Date();
@@ -45,8 +48,6 @@ public class Materia {
 	public Materia() {
 		super();
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -88,9 +89,17 @@ public class Materia {
 		this.create_at = create_at;
 	}
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	@Override
 	public String toString() {
 		return "Materia [id=" + id + ", nombre=" + nombre + ", horario=" + horario + ", max_alum=" + max_alum
-				+ ", create_at=" + create_at + "]";
+				+ ", create_at=" + create_at + ", descripcion=" + descripcion + "]";
 	}
 }

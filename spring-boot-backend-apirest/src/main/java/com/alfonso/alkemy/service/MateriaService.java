@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alfonso.alkemy.entity.Materia;
+import com.alfonso.alkemy.entity.Usuario;
 import com.alfonso.alkemy.interfaces.IMateriaService;
 import com.alfonso.alkemy.repository.IMateriaRepository;
 
@@ -17,7 +18,7 @@ public class MateriaService implements IMateriaService {
 	
 	@Override
 	public List<Materia> listMaterias() {
-		return repositoryMateria.findAll();
+		return repositoryMateria.findByOrderByNombreAsc();
 	}
 
 	@Override

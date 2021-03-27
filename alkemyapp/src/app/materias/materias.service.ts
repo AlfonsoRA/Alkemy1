@@ -59,7 +59,7 @@ export class MateriasService {
         )
       };
 
-      updateMateria(materia: Materia): Observable<any>{
+      updateMateria(materia: Materia): Observable<any>{ console.log(materia.descripcion)
         return this.http.put<any>(`${this.urlEndPoint}/${materia.id}`, materia, {headers: this.httpHeaders}).pipe(
           catchError(e => {
             if(e.status == 400){

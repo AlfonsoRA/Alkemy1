@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import swal from 'sweetalert2'
 import { Materia } from './materia';
 import { MateriasService } from './materias.service';
+import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-materias',
@@ -13,7 +14,7 @@ export class MateriasComponent implements OnInit {
 
   listaMaterias!: Materia[];
 
-  constructor(private materiaService: MateriasService) { }
+  constructor(private materiaService: MateriasService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.materiaService.getMaterias().subscribe(
@@ -22,8 +23,6 @@ export class MateriasComponent implements OnInit {
       }
     );
   };
-
-
 
   delete(materia: Materia): void {
     swal({

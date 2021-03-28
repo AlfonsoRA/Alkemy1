@@ -18,7 +18,9 @@ public class MateriaService implements IMateriaService {
 	
 	@Override
 	public List<Materia> listMaterias() {
-		return repositoryMateria.findByOrderByNombreAsc();
+		List<Materia> lista  = repositoryMateria.findByOrderByNombreAsc();
+		lista.stream().filter(materia -> materia.getMax_alum()> 0);
+		return lista;
 	}
 
 	@Override

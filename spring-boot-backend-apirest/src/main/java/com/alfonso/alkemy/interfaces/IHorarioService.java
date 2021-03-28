@@ -6,6 +6,7 @@ import java.util.List;
 import com.alfonso.alkemy.entity.Horario;
 
 public interface IHorarioService {
+	
+	List<Horario> findHorarios();
 
-	public List<Horario> buscarPorIdMateria(Long idMateria);
 }

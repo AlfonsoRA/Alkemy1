@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -29,8 +31,8 @@ public class Materia {
 	@Column(name = "f_name", nullable = false)
 	private String nombre;
 	
-	@OneToMany(mappedBy="materia", fetch =FetchType.EAGER)
-	private List<Horario> horario;
+	@Column(name = "schedule")
+	private String horario;
 
 	@Column(name = "max_student")
 	private Integer max_alum;
@@ -39,6 +41,9 @@ public class Materia {
 	
 	@Column(name = "description")
 	private String descripcion;
+	
+	@Column(name = "dayweek")
+	private String diaSemana;
 	
 	@PrePersist
 	private void prePersist() {
@@ -65,11 +70,11 @@ public class Materia {
 		this.nombre = nombre;
 	}
 
-	public List<Horario> getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(List<Horario> horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 
@@ -96,10 +101,20 @@ public class Materia {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	
+
+	public String getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(String diaSemana) {
+		this.diaSemana = diaSemana;
+	}
 
 	@Override
 	public String toString() {
 		return "Materia [id=" + id + ", nombre=" + nombre + ", horario=" + horario + ", max_alum=" + max_alum
-				+ ", create_at=" + create_at + ", descripcion=" + descripcion + "]";
+				+ ", create_at=" + create_at + ", descripcion=" + descripcion + ", diaSemana=" + diaSemana + "]";
 	}
 }

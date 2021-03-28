@@ -44,7 +44,6 @@ public class MateriaController {
 	@GetMapping("materia")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Materia> listMateria(){
-		
 		return materiaService.listMaterias();	
 	}
 	
@@ -56,7 +55,7 @@ public class MateriaController {
 		Map<String, Object> response = new HashMap<>();
 		try {
 			materia = materiaService.getMateria(id);
-			List<Horario> horarios = serviceHorarios.buscarPorIdMateria(materia.getId());
+			//List<Horario> horarios = serviceHorarios.buscarPorIdMateria(materia.getId());
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar  la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -69,9 +68,31 @@ public class MateriaController {
 		return new ResponseEntity<Materia>(materia, HttpStatus.OK);
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@GetMapping("materia/horarios")
+	public ResponseEntity<?> getHorarios() {
+		
+ 		List<Horario> horarios = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			horarios = serviceHorarios.findHorarios();
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar  la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		};
+		if(horarios == null){
+			response.put("mensaje", "Nos e encuentran horarios en la base de datos!!");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		};
+		response.put("horarios", horarios);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
 	@Secured({"ROLE_ADMIN"})
 	@PostMapping("materia")
 	public ResponseEntity<?> save(@Valid @RequestBody Materia materia, BindingResult result) {
+		
 		Materia materiaNew = null;
 		Map<String, Object> response = new HashMap<>();
 		

@@ -15,12 +15,11 @@ export class FormMateriaComponent implements OnInit {
   public materia: Materia = new Materia();
   public titulo: string = "Crear Materia";
   public errores!: String[];
-  /*myForm: FormGroup = this.formBuilder.group({
-    nombre: [this.materia.nombre,[Validators.required, Validators.minLength(4)]],
-    max_alum: [0, [Validators.required, Validators.min(0), Validators.max(30)]]
-  });*/
+  public dias: string[]=['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 
-  constructor(private materiasService: MateriasService, private router: Router, private activatedRoute: ActivatedRoute, /* private formBuilder: FormBuilder */) { }
+  public horarios: string[]=['9:00:00','10:00:00','11:00:00','18:00:00', '19:00:00', '20:00:00', '21:00:00', '22:00:00']; 
+
+  constructor(private materiasService: MateriasService, private router: Router, private activatedRoute:   ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
@@ -36,14 +35,22 @@ export class FormMateriaComponent implements OnInit {
         }
       }
     );
+    this.getHorarios();
+  }
+
+  getHorarios(): void{
+    console.log('llegue al ts')
+    this.materiasService.getHorarios().subscribe( (response:any) => {
+      this.horarios = response.horarios;
+    });
   }
 
   public create(): void {
+    console.log(this.materia);
      this.materiasService.createMaterias(this.materia)
     .subscribe(
         materia => {
-        this.router.navigate(['/materia']);
-        console.log(materia);
+        this.router.navigate(['/materias']);
         swal('Nuevo Materia', `La materia ha sido creado con exito!!`, 'success' )
       },
       err => {
@@ -57,7 +64,7 @@ export class FormMateriaComponent implements OnInit {
   public updateMateria(materia: Materia): void{
     this.materiasService.updateMateria(this.materia).subscribe(
       json => {
-        this.router.navigate(['/materia'])
+        this.router.navigate(['/materias'])
         swal('Materia Actualizada', `${json.mensaje}: ${json.materia.nombre} actualizado con exito!`, 'success' )
       },
       err => {
@@ -67,11 +74,4 @@ export class FormMateriaComponent implements OnInit {
       }
     )
   }
-
-
-
-  /* validacion(campo:string){
-    return this.myForm.controls[campo].errors && this.myForm.controls[campo].touched;
-  } */
-
 }

@@ -8,6 +8,7 @@ import swal from 'sweetalert2'
 import { Materia } from './materia';
 import { Observable, of, throwError   } from 'rxjs';
 import { map, catchError } from "rxjs/operators";
+import { Horario } from '../entidades/horario';
 
 @Injectable({
   providedIn: 'root'
@@ -35,42 +36,66 @@ export class MateriasService {
         );
       };
 
-      createMaterias(materia: Materia): Observable<Materia>{
-        return this.http.post(this.urlEndPoint, materia,{headers: this.httpHeaders}).pipe(
-          map( (response: any) => response.usuario as Materia),
-          catchError(e => {
-            if(e.status == 400){
-              return throwError(e);
-            }
-            console.error(e.error.mensaje);
-            swal('Error al crear la materia', e.error.mensaje, 'error');
-            return throwError(e);
-          })
-        )
-      };
+  //Obteniendo Horarios del backend
+  getHorarios(): Observable<Horario[]> {
+    //return Horarios
+    console.log('Servicio de horario')
+    return this.http.get<Horario[]>(`${this.urlEndPoint}/horarios`).pipe(
+      map((response: any) => {
+        response.hoarrios as Horario[];
+        console.log(response);
+        return response;      
+      }),
+      catchError( e => {
+        // Manejo de validacion que viene en el response del backend
+        if (e.status === 400){
+          return throwError(e);
+        }
 
-      deleteMateria(id:number): Observable<Materia>{
-        return this.http.delete<Materia>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders} ).pipe(
-          catchError(e => {
-            console.error(e.error.mensaje);
-            swal('Error al eliminar la materia', e.error.mensaje, 'error');
-            return throwError(e);
-          })
-        )
-      };
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  };
 
-      updateMateria(materia: Materia): Observable<any>{ console.log(materia.descripcion)
-        return this.http.put<any>(`${this.urlEndPoint}/${materia.id}`, materia, {headers: this.httpHeaders}).pipe(
-          catchError(e => {
-            if(e.status == 400){
-              return throwError(e);
-            }
-            console.error(e.error.mensaje);
-            swal('Error al modificar la materia', e.error.mensaje, 'error');
-            return throwError(e);
-          })
-        )
-      };
+  createMaterias(materia: Materia): Observable<Materia>{
+    return this.http.post(this.urlEndPoint, materia,{headers: this.httpHeaders}).pipe(
+      map( (response: any) => response.usuario as Materia),
+      catchError(e => {
+        if(e.status == 400){
+          return throwError(e);
+        }
+        console.error(e.error.mensaje);
+        swal('Error al crear la materia', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    )
+  };
+
+  deleteMateria(id:number): Observable<Materia>{
+    return this.http.delete<Materia>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders} ).pipe(
+      catchError(e => {
+        console.error(e.error.mensaje);
+        swal('Error al eliminar la materia', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    )
+  };
+
+  updateMateria(materia: Materia): Observable<any>{ console.log(materia.descripcion)
+    return this.http.put<any>(`${this.urlEndPoint}/${materia.id}`, materia, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        if(e.status == 400){
+          return throwError(e);
+        }
+        console.error(e.error.mensaje);
+        swal('Error al modificar la materia', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    )
+  };
 
       getMateria(id: number): Observable<Materia>{
         return this.http.get(`${this.urlEndPoint}/${id}`).pipe(

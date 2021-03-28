@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <form (ngSubmit)="create()" #materiaForm="ngForm">
-            <div class="row">
+            <div class="row mb-3 mt-3">
                 <label for="nombre" class="col-form-label col-sm-2">
                     Nombre:
                 </label>
@@ -18,7 +18,20 @@
                     Horario:
                 </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control">
+                    <select name="horarios" [(ngModel)]="materia.horario"  class="custom-select custom-select-lg mb-3">
+                        <option value="0" selected>Horarios</option>
+                        <option *ngFor="let item of horarios">{{item.hora}}</option>
+                    </select>
+                </div>
+            </div><br>
+            <div class="row">
+                <label for="horario" class="col-form-label col-sm-2">
+                    Dia de la semana:
+                </label>
+                <div class="col-sm-6">
+                    <select name="dias" [(ngModel)]="materia.diaSemana"  class="custom-select custom-select-lg mb-3">
+                        <option *ngFor="let item of dias">{{item}}</option>
+                    </select>
                 </div>
             </div><br>
             <div class="row">
@@ -49,3 +62,5 @@
         </form>
     </div>
 </div>
+
+

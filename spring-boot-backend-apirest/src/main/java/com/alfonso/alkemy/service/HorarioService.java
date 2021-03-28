@@ -16,8 +16,8 @@ public class HorarioService implements IHorarioService{
 	private IHorarioRepository horariosRepo;
 
 	@Override
-	public List<Horario> buscarPorIdMateria(Long idMateria) {
-		return horariosRepo.findByMateria_id(idMateria);
+	public List<Horario> findHorarios() {
+		return horariosRepo.findAll();
 	}
 	
 }

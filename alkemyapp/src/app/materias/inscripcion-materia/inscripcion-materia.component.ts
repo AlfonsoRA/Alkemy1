@@ -3,6 +3,7 @@ import { Materia } from '../materia';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MateriasService } from '../materias.service';
 import { Usuario } from '../../usuarios/usuario';
+import { AuthService } from '../../usuarios/auth.service';
 
 @Component({
   selector: 'app-inscripcion-materia',
@@ -12,13 +13,15 @@ import { Usuario } from '../../usuarios/usuario';
 export class InscripcionMateriaComponent implements OnInit {
 
   public materia: Materia = new Materia();
+  public alumno: Usuario = new Usuario();
   public titulo: string = "Inscripcion de Materia";
   public errores!: String[];
 
-  constructor(private materiasService: MateriasService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private materiasService: MateriasService, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit(): void {
+    this.cargarAlumno();
     this.cargarMateria();
   }
 
@@ -36,5 +39,9 @@ export class InscripcionMateriaComponent implements OnInit {
         }
       }
     );
+  }
+
+  public cargarAlumno(): void{
+     this.alumno = this.authService.usuario;
   }
 }

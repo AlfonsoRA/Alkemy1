@@ -35,8 +35,6 @@ export class MateriasService {
         );
       };
 
-
-
   createMaterias(materia: Materia): Observable<Materia>{
     return this.http.post(this.urlEndPoint, materia,{headers: this.httpHeaders}).pipe(
       map( (response: any) => response.usuario as Materia),

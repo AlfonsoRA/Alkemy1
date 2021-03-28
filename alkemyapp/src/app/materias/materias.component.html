@@ -11,7 +11,8 @@
             <tr>
                 <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">ID</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Max_Alum</th>
+                <th scope="col">Dia</th>
+                <th scope="col">Cupos</th>
                 <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Fecha de Creacion</th>
                 <th scope="col">Detalle</th>
                 <th scope="col" *ngIf="authService.hasRole('ROLE_USER')">Inscripcion</th>
@@ -23,6 +24,7 @@
             <tr *ngFor="let materia of listaMaterias">
                 <th scope="row" *ngIf="authService.hasRole('ROLE_ADMIN')">{{materia.id}}</th>
                 <td>{{materia.nombre}}</td>
+                <td>{{materia.diaSemana}}</td>
                 <td>{{materia.max_alum}}</td>
                 <td *ngIf="authService.hasRole('ROLE_ADMIN')">{{materia.create_at | date}}</td>
                 <td>

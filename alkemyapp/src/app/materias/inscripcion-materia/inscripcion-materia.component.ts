@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MateriasService } from '../materias.service';
 import { Usuario } from '../../usuarios/usuario';
 import { AuthService } from '../../usuarios/auth.service';
+import { Inscripcion } from './inscripcion';
 
 @Component({
   selector: 'app-inscripcion-materia',
@@ -43,5 +44,12 @@ export class InscripcionMateriaComponent implements OnInit {
 
   public cargarAlumno(): void{
      this.alumno = this.authService.usuario;
+  }
+
+  public inscripcion(): void{
+    let inscripcion: Inscripcion = new Inscripcion();
+    inscripcion.materia = this.materia;
+    inscripcion.usuario = this.alumno;
+    console.log(inscripcion);
   }
 }

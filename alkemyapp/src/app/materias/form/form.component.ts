@@ -17,7 +17,7 @@ export class FormMateriaComponent implements OnInit {
   public errores!: String[];
   public dias: string[]=['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 
-  public horarios: string[]=['9:00:00','10:00:00','11:00:00','18:00:00', '19:00:00', '20:00:00', '21:00:00', '22:00:00']; 
+  public horarios: string[]=['9:00:00','10:00:00','11:00:00','18:00:00', '19:00:00', '20:00:00', '21:00:00', '22:00:00'];
 
   constructor(private materiasService: MateriasService, private router: Router, private activatedRoute:   ActivatedRoute) { }
 
@@ -35,14 +35,6 @@ export class FormMateriaComponent implements OnInit {
         }
       }
     );
-    this.getHorarios();
-  }
-
-  getHorarios(): void{
-    console.log('llegue al ts')
-    this.materiasService.getHorarios().subscribe( (response:any) => {
-      this.horarios = response.horarios;
-    });
   }
 
   public create(): void {

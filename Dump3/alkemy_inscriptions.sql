@@ -4,8 +4,6 @@
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -18,27 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `regiones`
+-- Table structure for table `inscriptions`
 --
-use alkemy;
-DROP TABLE IF EXISTS `regiones`;
+
+DROP TABLE IF EXISTS `inscriptions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `regiones` (
+CREATE TABLE `inscriptions` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  `user_id` bigint NOT NULL,
+  `subject_id` bigint NOT NULL,
+  `create_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKsubjectinscripcion` (`subject_id`),
+  KEY `FKuserinscripcion` (`user_id`),
+  CONSTRAINT `FKsubjectinscripcion` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`),
+  CONSTRAINT `FKuserinscripcion` FOREIGN KEY (`user_id`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `regiones`
+-- Dumping data for table `inscriptions`
 --
 
-LOCK TABLES `regiones` WRITE;
-/*!40000 ALTER TABLE `regiones` DISABLE KEYS */;
-INSERT INTO `regiones` VALUES (1,'Sudamérica'),(2,'Centroamérica'),(3,'Norteamérica'),(4,'Europa'),(5,'Asia'),(6,'Africa'),(7,'Oceanía'),(8,'Antártida');
-/*!40000 ALTER TABLE `regiones` ENABLE KEYS */;
+LOCK TABLES `inscriptions` WRITE;
+/*!40000 ALTER TABLE `inscriptions` DISABLE KEYS */;
+INSERT INTO `inscriptions` VALUES (7,50,17,'2021-03-28'),(8,50,21,'2021-03-28'),(9,50,20,'2021-03-28');
+/*!40000 ALTER TABLE `inscriptions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-26 14:42:46
+-- Dump completed on 2021-03-28 20:12:19

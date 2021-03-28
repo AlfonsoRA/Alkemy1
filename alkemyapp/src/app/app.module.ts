@@ -34,15 +34,15 @@ registerLocaleData(localeES, 'es');
 
 const routes: Routes = [
   { path: '', redirectTo: '/materias', pathMatch: 'full' },
-  { path: 'profesor', component: ProfesoresComponent },
-  { path: 'profesor/form/:id', component:FormComponent },
-  { path: 'profesor/form', component:FormComponent },
+  { path: 'profesor', component: ProfesoresComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'profesor/form/:id', component:FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
+  { path: 'profesor/form', component:FormComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'materias', component: MateriasComponent },
   { path: 'materia/form', component:FormMateriaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   { path: 'materia/form/:id', component:FormMateriaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   { path: 'materia/detalle', component:DetalleMateriaComponent},
-  { path: 'materia/detalle/:id', component:DetalleMateriaComponent},
-  { path: 'materia/inscripcion/:id', component:InscripcionMateriaComponent},
+  { path: 'materia/detalle/:id', component:DetalleMateriaComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_USER' }},
+  { path: 'materia/inscripcion/:id', component:InscripcionMateriaComponent,},
   { path: 'login', component: LoginComponent }
 ];
 

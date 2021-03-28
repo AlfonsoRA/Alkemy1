@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios_roles`
+-- Table structure for table `subjects`
 --
 
-DROP TABLE IF EXISTS `usuarios_roles`;
+DROP TABLE IF EXISTS `subjects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios_roles` (
-  `usuario_id` bigint NOT NULL,
-  `role_id` bigint NOT NULL,
-  UNIQUE KEY `UKqjaspm7473pnu9y4jxhrds8r2` (`usuario_id`,`role_id`),
-  KEY `FKihom0uklpkfpffipxpoyf7b74` (`role_id`),
-  CONSTRAINT `FKihom0uklpkfpffipxpoyf7b74` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
-  CONSTRAINT `FKqcxu02bqipxpr7cjyj9dmhwec` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `subjects` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `f_name` varchar(25) DEFAULT NULL,
+  `create_at` date NOT NULL,
+  `max_student` int DEFAULT NULL,
+  `schedule` varchar(50) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `dayweek` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKhorariomateria` (`schedule`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios_roles`
+-- Dumping data for table `subjects`
 --
 
-LOCK TABLES `usuarios_roles` WRITE;
-/*!40000 ALTER TABLE `usuarios_roles` DISABLE KEYS */;
-INSERT INTO `usuarios_roles` VALUES (21,1),(22,1),(21,2);
-/*!40000 ALTER TABLE `usuarios_roles` ENABLE KEYS */;
+LOCK TABLES `subjects` WRITE;
+/*!40000 ALTER TABLE `subjects` DISABLE KEYS */;
+INSERT INTO `subjects` VALUES (17,'Catellano1','2021-03-28',30,'11:00:00','Materia de Castellano','Martes'),(18,'Ingles','2021-03-28',0,'10:00:00','materia Ingles','Lunes'),(20,'quimica','2021-03-28',23,'19:00:00','materia quimica','Miercoles'),(21,'Ciencias','2021-03-28',4,'20:00:00','materia de inscripciones','Jueves'),(22,'Sociales','2021-03-28',2,'18:00:00','Sociales Politicas','Viernes'),(23,'Física','2021-03-28',6,'18:00:00','Física','Viernes');
+/*!40000 ALTER TABLE `subjects` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-26 14:42:45
+-- Dump completed on 2021-03-28 20:12:21

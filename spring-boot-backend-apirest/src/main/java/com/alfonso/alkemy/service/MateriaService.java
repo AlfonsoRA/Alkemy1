@@ -1,12 +1,12 @@
 package com.alfonso.alkemy.service;
 
-import java.util.List;
+import java.util.List;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alfonso.alkemy.entity.Materia;
-import com.alfonso.alkemy.entity.Usuario;
 import com.alfonso.alkemy.interfaces.IMateriaService;
 import com.alfonso.alkemy.repository.IMateriaRepository;
 
@@ -19,8 +19,8 @@ public class MateriaService implements IMateriaService {
 	@Override
 	public List<Materia> listMaterias() {
 		List<Materia> lista  = repositoryMateria.findByOrderByNombreAsc();
-		lista.stream().filter(materia -> materia.getMax_alum()> 0);
-		return lista;
+		List<Materia> listab = lista.stream().filter(materia -> materia.getMax_alum() > 0).collect(Collectors.toList());
+		return listab;
 	}
 
 	@Override

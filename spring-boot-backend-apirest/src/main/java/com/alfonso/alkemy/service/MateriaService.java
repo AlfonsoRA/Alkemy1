@@ -18,7 +18,7 @@ public class MateriaService implements IMateriaService {
 	
 	@Override
 	public List<Materia> listMaterias() {
-		//Se realiza validacion de los 
+		//Se realiza validacion de las materias disponibles
 		List<Materia> lista  = repositoryMateria.findByOrderByNombreAsc();
 		List<Materia> listab = lista.stream().filter(materia -> materia.getMax_alum() > 0).collect(Collectors.toList());
 		return listab;

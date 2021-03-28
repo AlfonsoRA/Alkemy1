@@ -12,4 +12,5 @@ public interface IUsuarioService {
 	public Usuario updateUsuario(Usuario alumno);
 	public void delete(Long id);
 	public Usuario findByUsername(String username);
+	
 }

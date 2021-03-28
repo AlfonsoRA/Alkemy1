@@ -5,6 +5,7 @@ import { MateriasService } from '../materias.service';
 import { Usuario } from '../../usuarios/usuario';
 import { AuthService } from '../../usuarios/auth.service';
 import { Inscripcion } from './inscripcion';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inscripcion-materia',
@@ -47,9 +48,18 @@ export class InscripcionMateriaComponent implements OnInit {
   }
 
   public inscripcion(): void{
-    let inscripcion: Inscripcion = new Inscripcion();
-    inscripcion.materia = this.materia;
-    inscripcion.usuario = this.alumno;
-    console.log(inscripcion);
+    this.materiasService.createInscripcion(this.alumno.username, this.materia.id).subscribe(
+      response => {
+        this.router.navigate(['/materias']);
+        swal('Inscripcion', `La inscripcion ha sido creado con exito!!`, 'success' )
+      },
+      err => {
+        this.errores = err.error.errors as String[];
+        console.error('Codigo del error desde el backEnd: '+ err.status);
+        console.error(err.error.errors);
+      }
+    );
   }
+
+
 }

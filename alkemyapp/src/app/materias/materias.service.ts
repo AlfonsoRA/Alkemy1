@@ -8,6 +8,7 @@ import swal from 'sweetalert2'
 import { Materia } from './materia';
 import { Observable, of, throwError   } from 'rxjs';
 import { map, catchError } from "rxjs/operators";
+import { Inscripcion } from './inscripcion-materia/inscripcion';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class MateriasService {
 
   private httpHeaders = new HttpHeaders ({'Content-type':'application/json'});
   private urlEndPoint = "http://localhost:8080/materias/materia";
+  private urlEndPointInsc = "http://localhost:8080/inscripcion/save";
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -72,15 +74,32 @@ export class MateriasService {
     )
   };
 
-      getMateria(id: number): Observable<Materia>{
-        return this.http.get(`${this.urlEndPoint}/${id}`).pipe(
-          map (Response => Response as Materia),
-          catchError(e => {
-            this.router.navigate(['/materia']);
-            console.error(e.error.mensaje);
-            swal('Error al editar', e.error.mensaje, 'error');
-            return throwError(e);
-          })
-        )
-      };
+  getMateria(id: number): Observable<Materia>{
+    return this.http.get(`${this.urlEndPoint}/${id}`).pipe(
+      map (Response => Response as Materia),
+      catchError(e => {
+        this.router.navigate(['/materia']);
+        console.error(e.error.mensaje);
+        swal('Error al editar', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    )
+  };
+
+  createInscripcion(username: string, materia:number): Observable<Inscripcion>{
+    return this.http.post(`${this.urlEndPointInsc}/${username}/${materia}`,{headers: this.httpHeaders}).pipe(
+      map( (response: any) => response.inscripcion as Inscripcion),
+      catchError(e => {
+        if(e.status == 400){
+          swal('Error al crear la inscripcion', e.error.mensaje, 'error');
+          return throwError(e);
+          
+        }
+        console.error(e.error.mensaje);
+        swal('Error al crear la inscripcion', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    )
+  };
+    
 }

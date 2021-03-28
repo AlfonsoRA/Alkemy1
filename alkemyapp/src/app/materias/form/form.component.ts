@@ -35,15 +35,9 @@ export class FormMateriaComponent implements OnInit {
         }
       }
     );
-    this.getHorarios();
   }
 
-  getHorarios(): void{
-    console.log('llegue al ts')
-    this.materiasService.getHorarios().subscribe( (response:any) => {
-      this.horarios = response.horarios;
-    });
-  }
+
 
   public create(): void {
     console.log(this.materia);

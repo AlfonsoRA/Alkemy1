@@ -8,7 +8,6 @@ import swal from 'sweetalert2'
 import { Materia } from './materia';
 import { Observable, of, throwError   } from 'rxjs';
 import { map, catchError } from "rxjs/operators";
-import { Horario } from '../entidades/horario';
 
 @Injectable({
   providedIn: 'root'
@@ -36,29 +35,7 @@ export class MateriasService {
         );
       };
 
-  //Obteniendo Horarios del backend
-  getHorarios(): Observable<Horario[]> {
-    //return Horarios
-    console.log('Servicio de horario')
-    return this.http.get<Horario[]>(`${this.urlEndPoint}/horarios`).pipe(
-      map((response: any) => {
-        response.hoarrios as Horario[];
-        console.log(response);
-        return response;      
-      }),
-      catchError( e => {
-        // Manejo de validacion que viene en el response del backend
-        if (e.status === 400){
-          return throwError(e);
-        }
 
-        if (e.error.mensaje){
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
-    );
-  };
 
   createMaterias(materia: Materia): Observable<Materia>{
     return this.http.post(this.urlEndPoint, materia,{headers: this.httpHeaders}).pipe(

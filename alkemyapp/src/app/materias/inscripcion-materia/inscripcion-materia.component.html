@@ -9,7 +9,7 @@
                    Nombre:
                 </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="nombre" required minlength="4">
+                    <input type="text" class="form-control" name="nombre" disabled [(ngModel)]="alumno.nombre">
                 </div>
             </div><br>
             <div class="form-group row">
@@ -17,15 +17,7 @@
                 Apellido:
             </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="apellido" required>
-                </div>
-            </div><br>
-            <div class="form-group row">
-                <label for="dni" class="col-form-label col-sm-2">
-                DNI:
-            </label>
-                <div class="col-sm-6">
-                    <input type="number" class="form-control" name="dni" required min="1">
+                    <input type="text" class="form-control" name="apellido" disabled [(ngModel)]="alumno.apellido">
                 </div>
             </div><br>
             <div class="form-group row">

@@ -40,10 +40,7 @@ public class ProfesorController {
 	@GetMapping("profesores/{rol}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Usuario> listProfesores(@PathVariable String rol){
-		System.out.println("llegue back");
-		System.out.println(rol);
 		List<Usuario> lista = usuarioService.listUsuarios(rol);
-		System.out.println(lista);
 		return lista;	
 	}
 	
@@ -84,6 +81,7 @@ public class ProfesorController {
 		}
 		
 		try {
+			usuario.setRol("Teacher");
 			usuarioNew = usuarioService.guardarUsuario(usuario);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");

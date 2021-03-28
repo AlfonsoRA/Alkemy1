@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
@@ -35,7 +36,6 @@ public class Usuario implements Serializable {
 
 	private Boolean enabled;
 
-	
 	@Column(unique = true)
 	private String email;
 
@@ -56,10 +56,14 @@ public class Usuario implements Serializable {
 	
 	private Integer dni;
 	
-	@NotEmpty(message = "no puede estar vacio!!")
 	private String rol;
 	
 	private Date create_at;
+	
+	@PrePersist
+	private void prePersist() {
+		this.create_at = new Date();
+	}
 	
 	public Long getId() {
 		return id;
